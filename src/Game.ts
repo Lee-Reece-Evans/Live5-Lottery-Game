@@ -251,7 +251,8 @@ export class Game
 	}
 
 	/**
-	 * Gets a random ball from the pickable ball panel
+	 * Gets a random ball from the pickable ball panel, with duplicate prevention 
+	 * by checking if the list of drawn balls already includes the random one picked
 	 * @returns A random Ball
 	 */
 	private getRandomDrawball(): Ball

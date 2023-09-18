@@ -86,19 +86,26 @@ export class PickableBallSelectionPanel extends BallSelectionPanel
         autoPick ? this.autoPick() : this.enableInteractable();
     }
 
+    /**
+     * Start autopicking the player's chosen balls
+     */
     private autoPick(): void
     {
         for(let pickCount: number = 0; pickCount < this.getMaxSelectableBalls(); pickCount++)
             setTimeout(this.pickRandomBall.bind(this), 1000 * pickCount);
     }
 
+    /**
+     * Picks a random ball with duplicate prevention by checking if the list of selected balls
+     * already includes the random one picked
+     */
     private pickRandomBall(): void
     {
         let randomBallIndex: number = 0;
         do
         {
             randomBallIndex = Utility.getRandomNumber(this.numberOfPickableBalls);
-        } while(this.selectedBallNumbers.includes(randomBallIndex));
+        } while(this.selectedBallNumbers.includes(this.getBall(randomBallIndex).getBallNumber()));
 
         this.getBall(randomBallIndex).pickBall();
     }
